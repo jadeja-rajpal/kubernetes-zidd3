@@ -2,7 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: nginx-deployment
+  name: nginx-deployment-ns
+  namespace: development
 
 spec:
   replicas: 3

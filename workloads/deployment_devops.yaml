@@ -2,10 +2,10 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: nginx-deployment
+  name: devops-deployment
 
 spec:
-  replicas: 3
+  replicas: 10
 
   selector:
     matchLabels:
@@ -19,6 +19,6 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:1.16.1
+        image: nginx:latest
         ports:
         - containerPort: 80

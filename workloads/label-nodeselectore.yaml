@@ -1,3 +1,6 @@
+kubectl label node node2 workload=application
+kubectl get nodes --show-labels
+
 apiVersion: apps/v1
 kind: Deployment
 
@@ -17,8 +20,11 @@ spec:
         app: nginx
 
     spec:
+      nodeSelector:
+        workload: application
+
       containers:
       - name: nginx
-        image: nginx:1.16.1
+        image: nginx:latest
         ports:
         - containerPort: 80

@@ -10,7 +10,7 @@ spec:
   ingressClassName: nginx
 
   rules:
-  - host: demo.local
+  - host: devops.local
     http:
       paths:
       - path: /app1

@@ -1,0 +1,35 @@
+kubectl taint node node2 workload=application:NoSchedule
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: nginx-deployment
+
+spec:
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app: nginx
+
+  template:
+    metadata:
+      labels:
+        app: nginx
+
+    spec:
+
+      nodeSelector:
+        workload: application
+
+      tolerations:
+      - key: workload
+        operator: Equal
+        value: application
+        effect: NoSchedule
+
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80

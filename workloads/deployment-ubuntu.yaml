@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ubuntu-longterm
+  labels:
+    app: ubuntu
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ubuntu
+  template:
+    metadata:
+      labels:
+        app: ubuntu
+    spec:
+      containers:
+      - name: ubuntu-container
+        image: ubuntu:latest
+        # Keeps the container alive indefinitely by looping a sleep command
+        command: ["/bin/bash", "-c"]
+        args: ["while true; do sleep 30; done;"]
+        imagePullPolicy: IfNotPresent
