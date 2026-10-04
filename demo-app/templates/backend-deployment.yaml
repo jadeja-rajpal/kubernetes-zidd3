@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.backend.name }}
+spec:
+  replicas: {{ .Values.backend.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.backend.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.backend.name }}
+    spec:
+      containers:
+        - name: {{ .Values.backend.name }}
+          image: "{{ .Values.backend.image }}:{{ .Values.backend.tag }}"
+          args: ["-text=hello from backend", "-listen=:{{ .Values.backend.port }}"]
+          ports:
+            - containerPort: {{ .Values.backend.port }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.backend.name }}-config
+            - secretRef:
+                name: {{ .Values.backend.name }}-secret

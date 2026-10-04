@@ -1,0 +1,22 @@
+backend:
+  name: backend
+  replicas: 4
+  image: hashicorp/http-echo
+  tag: "1.0"
+  port: 5678
+  serviceType: ClusterIP
+  servicePort: 80
+  logLevel: warn
+  appEnv: prod
+  dbPassword: prod-secret-123
+
+frontend:
+  name: frontend
+  replicas: 3
+  image: nginx
+  tag: "1.27"
+  port: 80
+  serviceType: ClusterIP
+  servicePort: 80
+  backendUrl: http://backend
+  apiKey: prod-api-key

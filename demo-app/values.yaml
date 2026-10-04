@@ -1,0 +1,22 @@
+backend:
+  name: backend
+  replicas: 2
+  image: hashicorp/http-echo
+  tag: "1.0"
+  port: 5678
+  serviceType: ClusterIP
+  servicePort: 80
+  logLevel: info
+  appEnv: dev
+  dbPassword: changeme
+
+frontend:
+  name: frontend
+  replicas: 1
+  image: nginx
+  tag: "1.27"
+  port: 80
+  serviceType: ClusterIP
+  servicePort: 80
+  backendUrl: http://backend
+  apiKey: dummy-key
